@@ -1,7 +1,9 @@
 import requests
+import xmltodict
 import sqlbackend
 from lxml import html
 import xml.etree.ElementTree as ET
+import PageScraper
 
 #PMC Portion
 #Codes input into PMC-friendly search terms with a main topic AND an OR query
@@ -16,13 +18,13 @@ g.mainDict = {}
 
 def esearch():
     topic_input = input()
-    topic = topic_input.replace(' ','+')
+    topic = "%22"+topic_input.replace(' ','+')+"%22"
     queries = input()
     nResults = input()
     if queries:
         query_terms = [i.strip() for i in queries.split(',')]
         boolean_queries = '+OR+'.join(query_terms)
-        search_terms = topic+'+AND+('+boolean_queries+')'
+        search_terms = topic+'+AND+%28'+boolean_queries+'%29'
     else:
         search_terms=topic
     baseURL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pmc&retmax='+nResults+'&term='
@@ -34,6 +36,7 @@ def esearch():
 
 
 def efetch(PMC):
+    #eSummary returns most all of this data more succintly, leaving here if necessary later
     #Retrieves relevant data into an OrderedDict formatted from server's XML
     baseURL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id='
     search = baseURL + PMC + '&rettype=report_type&retmode=xml'
@@ -61,23 +64,51 @@ def efetch(PMC):
 
     for i in data.iter(tag='pub-date'):
         if i.attrib['pub-type'] == "epub":
-            day = i.find('day').text
-            month = i.find('month').text
-            year = i.find('year').text
-            pub_date = '.'.join((day, month, year))
-            g.mainDict[PMC]['Date'] = pub_date
+         day = i.find('day').text
+         month = i.find('month').text
+         year = i.find('year').text
+         pub_date = '.'.join((day, month, year))
+         g.mainDict[PMC]['Date'] = pub_date
+
+def esummary(PMC):
+    #Retrieves relevant data into an OrderedDict formatted from server's XML
+
+    baseURL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pmc&id='
+    search = baseURL + PMC + '&rettype=report_type&retmode=xml'
+    r = requests.get(search, stream=True)
+    tree = ET.fromstring(r.content)
+    g.mainDict[PMC] = {}
+
+    g.mainDict[PMC]['Date']=tree[0][1].text
+
+    g.mainDict[PMC]['Authors'] = []
+    for author in tree[0][4]:
+        g.mainDict[PMC]['Authors'].append(author.text)
+
+    g.mainDict[PMC]['Title']=tree[0][5].text
+
+    g.mainDict[PMC]['DOI']=tree[0][10].text
+
+
+esearch()
+
+for PMC in g.PMCIDs:
+    print(PMC)
+    esummary(PMC)
+    g.mainDict[PMC]['Images'] = []
+    for image in PageScraper.image_scraper(PMC):
+        g.mainDict[PMC]['Images'].append(image)
+    g.mainDict[PMC]['Abstract'] = PageScraper.text_scraper(PMC)
+
 
 def sql_insert():
     sqlbackend.create_table()
     for i in g.mainDict:
         ref = g.mainDict[i]
-        sqlbackend.insert(i, ref['DOI'], ref['Title'], ', '.join(ref['Authors']), ref['Date'])
+        sqlbackend.insert(i, ref['DOI'], ref['Title'], ', '.join(ref['Authors']),
+                          ref['Date'], ref['Abstract'], ', '.join(ref['Images']))
     print(sqlbackend.view())
 
-esearch()
-for PMC in g.PMCIDs:
-    print(PMC)
-    #efetch(PMC)
 
-print(g.mainDict)
-#sql_insert()
+
+sql_insert()
