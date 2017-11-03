@@ -1,15 +1,24 @@
 import requests
 from bs4 import BeautifulSoup
+from lxml import html
+
+def image_scraper(PMC):
+    base_url = 'https://www.ncbi.nlm.nih.gov/pmc/articles/'
+    search = base_url+PMC
+    r = requests.get(search)
+    data = html.fromstring(r.content)
+    img_links = data.xpath('//img[@class="small-thumb"]/@src-large')
+    if len(img_links) < 1:
+        img_links.append('blank')
+    return img_links
 
 
-def content_grab(PMC):
-    baseURL = 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC'
-    r = requests.get(baseURL+str(PMC))
-    soup = BeautifulSoup(r.content, 'html.parser')
-    imgs = soup.findAll("div", {"class": "small-thumb"})
-    for img in imgs:
-        print(img.get('href'))
-    #print(''.join(soup.body.h2.find_all_next(string=True)))
-    #print(soup.text)
-
-content_grab(5470759)
+def text_scraper(PMC):
+    base_url = 'https://www.ncbi.nlm.nih.gov/pmc/articles/'
+    search = base_url+PMC
+    r = requests.get(search)
+    data = html.fromstring(r.content)
+    text_data = data.xpath('//p[@class="p p-first-last"]//text()')
+    if len(text_data)<1:
+        text_data.append('blank')
+    return str(text_data)
