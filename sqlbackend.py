@@ -8,20 +8,18 @@ import sqlite3
 5. Close connection 
 """
 
-#conn = psycopg2.connect(dbname='database1' user='postgres' password='postgres123' host='localhost' port='5432')
-
 def create_table():
     conn = sqlite3.connect("database.db")
     cur = conn.cursor()
     cur.execute("DROP TABLE IF EXISTS main")
-    cur.execute("CREATE TABLE IF NOT EXISTS main (pmc TEXT, doi TEXT, title TEXT, authors TEXT, date TEXT)")
+    cur.execute("CREATE TABLE IF NOT EXISTS main (pmc TEXT, doi TEXT, title TEXT, authors TEXT, date TEXT, abstract TEXT, images TEXT)")
     conn.commit()
     conn.close()
 
-def insert(pmc, doi, title, authors, date):
+def insert(pmc, doi, title, authors, date, abstract, images):
     conn = sqlite3.connect("database.db")
     cur = conn.cursor()
-    cur.execute("INSERT INTO main VALUES (?, ?, ?, ?, ?)", (pmc, doi, title, authors, date))
+    cur.execute("INSERT INTO main VALUES (?, ?, ?, ?, ?, ?, ?)", (pmc, doi, title, authors, date, abstract, images))
     conn.commit()
     conn.close()
 
