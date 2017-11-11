@@ -1,8 +1,8 @@
 # Grid Cells: Brain, Neuron (Summary Report) 
 ----- 
-> Showing top (10) relevant results from PubMed Central 
-> Articles dating from range 2000-2010 
-> Most commonly referenced words in abstract: list here 
+> - Showing top (10) relevant results from PubMed Central 
+> - Articles dating from range 2000-2010 
+> - Most commonly referenced words in abstract: list here 
 
 ----- 
 
