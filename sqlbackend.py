@@ -12,16 +12,17 @@ def create_table():
     conn = sqlite3.connect("database.db")
     cur = conn.cursor()
     cur.execute("DROP TABLE IF EXISTS main")
-    cur.execute("CREATE TABLE IF NOT EXISTS main (pmc TEXT, doi TEXT, title TEXT, authors TEXT, date TEXT, abstract TEXT, images TEXT)")
+    cur.execute("CREATE TABLE IF NOT EXISTS main (query TEXT, pmc TEXT, doi TEXT, title TEXT, authors TEXT, date TEXT, abstract TEXT, images TEXT)")
     conn.commit()
     conn.close()
 
-def insert(pmc, doi, title, authors, date, abstract, images):
+def insert(query, pmc, doi, title, authors, date, abstract, images):
     conn = sqlite3.connect("database.db")
     cur = conn.cursor()
-    cur.execute("INSERT INTO main VALUES (?, ?, ?, ?, ?, ?, ?)", (pmc, doi, title, authors, date, abstract, images))
+    cur.execute("INSERT INTO main VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (query, pmc, doi, title, authors, date, abstract, images))
     conn.commit()
     conn.close()
+
 
 def view():
     conn = sqlite3.connect("database.db")
