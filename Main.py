@@ -4,6 +4,8 @@ import sqlbackend
 from lxml import html
 import xml.etree.ElementTree as ET
 import PageScraper
+import ReportGenerator
+
 
 #PMC Portion
 #Codes input into PMC-friendly search terms with a main topic AND an OR query
@@ -21,17 +23,33 @@ def esearch():
     topic = "%22"+topic_input.replace(' ','+')+"%22"
     queries = input()
     nResults = input()
+
     if queries:
         query_terms = [i.strip() for i in queries.split(',')]
         boolean_queries = '+OR+'.join(query_terms)
         search_terms = topic+'+AND+%28'+boolean_queries+'%29'
     else:
         search_terms=topic
+    g.query = search_terms
     baseURL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pmc&retmax='+nResults+'&term='
     r = requests.get(baseURL+search_terms)
     xmldict = xmltodict.parse(r.content)
     g.PMCIDs = [i for i in xmldict['eSearchResult']['IdList']['Id']]
+
     print(g.PMCIDs)
+
+    #Formats the search nicely for use in the report
+    printable_search = topic_input
+
+    if queries:
+        printable_search += ':'
+        for i in query_terms:
+            printable_search += ' '+i+','
+        printable_search = printable_search[:-1]
+
+    formatted_title = printable_search.title()
+    g.query = formatted_title
+
 
 
 
@@ -78,15 +96,11 @@ def esummary(PMC):
     r = requests.get(search, stream=True)
     tree = ET.fromstring(r.content)
     g.mainDict[PMC] = {}
-
     g.mainDict[PMC]['Date']=tree[0][1].text
-
     g.mainDict[PMC]['Authors'] = []
     for author in tree[0][4]:
         g.mainDict[PMC]['Authors'].append(author.text)
-
     g.mainDict[PMC]['Title']=tree[0][5].text
-
     g.mainDict[PMC]['DOI']=tree[0][10].text
 
 
@@ -105,10 +119,10 @@ def sql_insert():
     sqlbackend.create_table()
     for i in g.mainDict:
         ref = g.mainDict[i]
-        sqlbackend.insert(i, ref['DOI'], ref['Title'], ', '.join(ref['Authors']),
+        sqlbackend.insert(g.query, i, ref['DOI'], ref['Title'], ', '.join(ref['Authors']),
                           ref['Date'], ref['Abstract'], ', '.join(ref['Images']))
     print(sqlbackend.view())
 
-
-
-sql_insert()
+print(g.mainDict)
+sqlinsert()
+ReportGenerator.markdown_generator(g.mainDict,g.query)
