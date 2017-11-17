@@ -7,12 +7,15 @@ The databases used will be those outlined by Unpaywall as open-access: PubMed Ce
 
 At the moment, reports can be generated in markdown, and HTML. Working on LaTeX and PDF.
 
-To do: 
+To do:
+
 * more relevant results - check if topic in article title?
 * Summarizer?
 
 Similar projects: 
+
 https://github.com/ContentMine/journal-scrapers (for ContentMine framework)
+
 https://github.com/EFavDB/PubmedCentral_Scraper (in R, only from PubMed)
 
 ## Using the Scraper
