@@ -8,18 +8,18 @@ The databases used will be those outlined by Unpaywall as open-access: PubMed Ce
 At the moment, reports can be generated in markdown, and HTML. Working on LaTeX and PDF.
 
 To do: 
-*more relevant results - check if topic in article title?
-*Summarizer?
+* more relevant results - check if topic in article title?
+* Summarizer?
 
 Similar projects: 
 https://github.com/ContentMine/journal-scrapers (for ContentMine framework)
 https://github.com/EFavDB/PubmedCentral_Scraper (in R, only from PubMed)
 
-##Using the Scraper
+## Using the Scraper
 
 The scraper takes up to three arguments: a main topic, optional queries, and the maximum number of results to return. It is initialized by running Main.py, and generates the reports as local files in the folder ran.
 
-###Function Documentation
+### Function Documentation
 
 1 - PubMed Central API
 
