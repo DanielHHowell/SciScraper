@@ -11,7 +11,7 @@ def image_scraper(PMC):
     if len(img_links) > 0:
         img_URLS = ['https://www.ncbi.nlm.nih.gov/'+i for i in img_links]
     else:
-        img_links.append('blank')
+        img_URLs = []
     return img_URLS
 
 

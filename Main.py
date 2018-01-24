@@ -18,12 +18,11 @@ g = Global()
 
 g.mainDict = {}
 
-def esearch():
-    topic_input = input()
+def esearch(a,b,c):
+    topic_input = a
     topic = "%22"+topic_input.replace(' ','+')+"%22"
-    queries = input()
-
-    g.nResults = input()
+    queries = b
+    g.nResults = c
 
     if queries:
         query_terms = [i.strip() for i in queries.split(',')]
@@ -46,6 +45,7 @@ def esearch():
         printable_search = printable_search[:-1]
 
     g.query = printable_search.title()
+    print(printable_search)
 
 
 
@@ -117,14 +117,13 @@ def sql_insert():
                           ref['Date'], ref['Abstract'], ', '.join(ref['Images']))
 
 
-def sciscraper():
-    esearch()
+def sciscraper(a,b,c):
+    esearch(a,b,c)
     for PMC in g.PMCIDs:
         esummary(PMC)
         g.mainDict[PMC]['Images'] = []
         for image in PageScraper.image_scraper(PMC):
             g.mainDict[PMC]['Images'].append(image)
-    sql_insert()
-    ReportGenerator.markdown_generator(g.mainDict, g.query, g.nResults)
-
-sciscraper()
+    #ReportGenerator.markdown_generator(g.mainDict, g.query, g.nResults)
+    #ReportGenerator.htmltest()
+    return g.mainDict
