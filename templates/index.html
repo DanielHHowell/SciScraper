@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Reusable Form Demo</title>
+       <link rel="stylesheet" media="screen" href ="static/css/bootstrap.min.css">
+       <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
+       <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+
+    </head>
+    <body>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">SciScraper</a>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ><a href="index.html">New Search</a></li>
+
+      </ul>
+
+
+      </div><!--navbar-->
+    </div><!--container-->
+
+    </nav>
+
+<div class="container">
+
+
+  <h2>SciScraper</h2>
+  <form action="" method="post">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="topic">Main topic:</label>
+      <input type="text" class="form-control" id="topic" name="topic" placeholder="e.g. grid cells">
+      <br>
+      <label for="queries">Additional queries (comma separated):</label>
+      <input type="text" class="form-control" id="queries" name="queries" placeholder="e.g. neurons, brain">
+      <br>
+      <label for="nResults">Number of Results:</label>
+      <input type="text" class="form-control" id="nResults" name="nResults" placeholder="e.g. 10">
+
+
+    </div>
+    <button type="submit" class="btn btn-success">Search</button>
+  </form>
+
+<br><br><br>
+    <div class="jumbotron">
+        <h2>About</h2>
+        <p>The goal of this project was to give the searching of NCBI a facelift. Pouring
+        through the database is an outdated interaction, which here has been made into a
+        single-page experience with downloaded reports available as well
+            (in either HTML or PDF). The scraper uses their native API which sometimes does
+        not provide all information and for now results in occasional formatting errors. Searches
+        are also currently slow and take 5-10 seconds to process.</p>
+        <p><a href="https://github.com/DanielHHowell/SciScraper">Link to GitHub page</a></p>
+        <p>Send suggestions or feature ideas here~</p>
+        <p>- Daniel Howell</p>
+    </div>
+
+<br><br>
+
+<h2>Example report below:</h2>
+        <div class="jumbotron">
+    <h3 style="color:#000099"><i>A Theory of How Columns in the Neocortex Enable Learning the Structure of the World</i></h3>
+    <br>
+    <ul>
+        <li>DOI: 10.3389/fncir.2017.00081</li>
+        <li>Date: 2017 Oct 25</li>
+        <li>Author(s): Hawkins J, Ahmad S, Cui Y</li>
+    </ul>
+    <br>
+    <h4 style="line-height:1.75">Abstract: 'The neocortex is complex. Within its 2.5 mm thickness are dozens of
+        cell types, numerous layers, and intricate connectivity patterns. The connections between cells suggest a
+        columnar flow of information across layers as well as a laminar flow within some layers. Fortunately, this
+        complex circuitry is remarkably preserved in all regions, suggesting that a canonical circuit consisting of
+        columns and layers underlies everything the neocortex does. Understanding the function of the canonical
+        circuit is a key goal of neuroscience.'
+</h4>
+
+
+</div>
+</body>
+</html>
