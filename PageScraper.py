@@ -8,11 +8,12 @@ def image_scraper(PMC):
     r = requests.get(search)
     data = html.fromstring(r.content)
     img_links = data.xpath('//img[@class="small-thumb"]/@src-large')
+    img_URLs = []
     if len(img_links) > 0:
-        img_URLS = ['https://www.ncbi.nlm.nih.gov/'+i for i in img_links]
-    else:
-        img_URLs = []
-    return img_URLS
+        img_URLs = ['https://www.ncbi.nlm.nih.gov/'+i for i in img_links]
+    if len(img_URLs)>4:
+        return img_URLs[1:4]
+    return img_URLs
 
 
 def text_scraper(PMC):

@@ -15,7 +15,7 @@ class InputForm(Form):
     nResults = StringField('Password:')
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/index.html", methods=['GET', 'POST'])
 def index():
     form = InputForm(request.form)
 
@@ -27,7 +27,8 @@ def index():
 
         if form.validate():
             resultdict = Main.sciscraper(topic,queries,nResults)
-            return render_template('report.html', form=form)
+            return render_template('/report.html', reportdict=resultdict)
+
         else:
             flash('Error: All the form fields are required. ')
 

@@ -9,8 +9,13 @@ At the moment, reports can be generated in markdown, and HTML. Working on LaTeX 
 
 To do:
 
-* more relevant results - check if topic in article title?
 * Summarizer?
+* Curtailing long sections (e.g. authors/abstract)
+* Download HTML/PDF feature
+* Interaction?
+* Popular searches
+* Faster
+* Sort by (relevance, date, etc.)
 
 Similar projects: 
 

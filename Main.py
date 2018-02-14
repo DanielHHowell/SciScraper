@@ -1,7 +1,6 @@
 import requests
 import xmltodict
 import sqlbackend
-from lxml import html
 import xml.etree.ElementTree as ET
 import PageScraper
 import ReportGenerator
@@ -98,7 +97,7 @@ def esummary(PMC):
     g.mainDict[PMC]['Authors'] = []
     for author in tree[0][4]:
         g.mainDict[PMC]['Authors'].append(author.text)
-    g.mainDict[PMC]['Title']=tree[0][5].text
+    g.mainDict[PMC]['Title']=tree[0][5].text.title()
     g.mainDict[PMC]['DOI']=tree[0][10].text
 
     efetch_URL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id='
