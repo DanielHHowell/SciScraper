@@ -10,9 +10,9 @@ app = Flask(__name__)
 
 
 class InputForm(Form):
-    topic = StringField('Name:')
-    queries = StringField('Email:')
-    nResults = StringField('Password:')
+    topic = StringField('topic:')
+    queries = StringField('queries:')
+    nResults = StringField('nResults:')
 
 
 @app.route("/index.html", methods=['GET', 'POST'])
@@ -26,7 +26,8 @@ def index():
         nResults = request.form['nResults']
 
         if form.validate():
-            resultdict = Main.sciscraper(topic,queries,nResults)
+            g = Main.sciscraper(topic,queries,nResults,'relevance')
+            resultdict = g.mainDict
             return render_template('/report.html', reportdict=resultdict)
 
         else:

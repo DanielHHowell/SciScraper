@@ -11,11 +11,20 @@ To do:
 
 * Summarizer?
 * Curtailing long sections (e.g. authors/abstract)
-* Download HTML/PDF feature
+* Download HTML/PDF feature (email?)
 * Interaction?
 * Popular searches
 * Faster
 * Sort by (relevance, date, etc.)
+* Remove 'anthology' articles (scrape +2 nResults as buffer?)
+* NLTK
+* Hoverzoom images
+* Article links
+* Sidebar nav of studies
+* Additional DB's - arXiv, etc.
+* Checkbox for reports
+* Alert message if not_validate()
+* Large-scale analytics with bootstrap cards UI?
 
 Similar projects: 
 

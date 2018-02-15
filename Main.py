@@ -13,15 +13,14 @@ import ReportGenerator
 class Global:
     def __init__(self):
         pass
+#PMCIDs, printable search,
 g = Global()
-
 g.mainDict = {}
 
-def esearch(a,b,c):
-    topic_input = a
-    topic = "%22"+topic_input.replace(' ','+')+"%22"
-    queries = b
-    g.nResults = c
+def esearch(topic_input, queries, nResults, sortby):
+
+    topic = topic_input.replace(' ','+')
+    g.nResults = nResults
 
     if queries:
         query_terms = [i.strip() for i in queries.split(',')]
@@ -29,7 +28,7 @@ def esearch(a,b,c):
         search_terms = topic+'+AND+%28'+boolean_queries+'%29'
     else:
         search_terms=topic
-    baseURL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pmc&sort=relevance&retmax='+g.nResults+'&term='
+    baseURL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pmc&sort='+sortby+'&retmax='+g.nResults+'&term='
     r = requests.get(baseURL+search_terms)
     xmldict = xmltodict.parse(r.content)
     g.PMCIDs = [i for i in xmldict['eSearchResult']['IdList']['Id']]
@@ -116,8 +115,8 @@ def sql_insert():
                           ref['Date'], ref['Abstract'], ', '.join(ref['Images']))
 
 
-def sciscraper(a,b,c):
-    esearch(a,b,c)
+def sciscraper(topic,queries,nResults,sortby):
+    esearch(topic,queries,nResults,sortby)
     for PMC in g.PMCIDs:
         esummary(PMC)
         g.mainDict[PMC]['Images'] = []
@@ -125,4 +124,4 @@ def sciscraper(a,b,c):
             g.mainDict[PMC]['Images'].append(image)
     #ReportGenerator.markdown_generator(g.mainDict, g.query, g.nResults)
     #ReportGenerator.htmltest()
-    return g.mainDict
+    return g
