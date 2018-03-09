@@ -28,12 +28,20 @@ def index():
         if form.validate():
             g = Main.sciscraper(topic,queries,nResults,'relevance')
             resultdict = g.mainDict
-            return render_template('/report.html', reportdict=resultdict)
+            return render_template('/report.html', reportdict=resultdict, searchtitle = g.query, nResults = g.nResults)
 
         else:
             flash('Error: All the form fields are required. ')
 
     return render_template('index.html', form=form)
+
+@app.route("/testing.html")
+def testing():
+    return render_template('testing.html')
+
+@app.route("/testingindex.html")
+def testingindex():
+    return render_template('testingindex.html')
 
 if __name__ == '__main__':
    app.run(debug = True)

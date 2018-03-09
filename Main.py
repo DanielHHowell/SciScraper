@@ -43,7 +43,6 @@ def esearch(topic_input, queries, nResults, sortby):
         printable_search = printable_search[:-1]
 
     g.query = printable_search.title()
-    print(printable_search)
 
 
 
@@ -104,6 +103,7 @@ def esummary(PMC):
     r2 = requests.get(search_abstract).text
     abstract = r2[r2.find('AB') + 6:r2.find('FAU')]
     g.mainDict[PMC]['Abstract'] = " ".join(abstract.split())
+    g.mainDict[PMC]['Link'] = 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC'+PMC
 
 
 

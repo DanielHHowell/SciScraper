@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>SciScraper</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/custom.css" />
-  </head>
-  <body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Collapsible sidebar using Bootstrap 3</title>
+
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Our Custom CSS -->
+
+        <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/zoom.css') }}">
+    </head>
+    <body>
 
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -26,7 +35,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li ><a href="index.html">New Search</a></li>
-
       </ul>
 
 
@@ -35,13 +43,19 @@
 
     </nav>
 
+<div class="container">
+    <div class="jumbotron">
+    <h3>{{ searchtitle }}</h3>
+        <br>
+    <ul>
+        <li><h5>Showing top ({{nResults}}) results</h5></li>
+    </ul>
+        </div>
 
 
-
-{% for i in reportdict %}
-    <div class="container">
 <div class="jumbotron">
-    <h3 style="color:#000099"><i>{{ reportdict[i].Title }} </i></h3>
+{% for i in reportdict %}
+    <h3 style="color:#000099"><a href="{{ reportdict[i].Link }}" target="_blank"><i>{{ reportdict[i].Title }} </i></a></h3>
     <br>
     <ul>
         <li>PMC: {{ i }} </li>
@@ -50,26 +64,28 @@
         <li>{{ reportdict[i]['Authors'] }} </li>
     </ul>
     <br>
-    <h4 style="line-height:1.75">{{ reportdict[i]['Abstract'] }}</h4>
+    <p style="line-height:2.5;font-size:15px">{{ reportdict[i]['Abstract'] }}</p>
     {% if reportdict[i]['Images'] %}
     <br>
           <div class="container">
     <p>Figures from article:</p>
     <div class="row">
+        <ul class="list-inline gallery">
     {% for j in reportdict[i]['Images'] %}
-         <div class="col-lg-4 col-xs-6 thumbnail"><img  src="{{ j }}" alt=""></div>
+            <div class="col-lg-4 col-xs-6 thumbnail zoom"><img src="{{ j }}" alt=""></div>
     {% endfor %}
+        </ul>
         {% endif %}
     </div>
           </div>
-
-</div>
-            </div>
+    <br>
+    <br>
+    <hr>
+    <hr>
+    <br>
         {% endfor %}
-
-
-
-
+    </div>
+    </div>
 
   </body>
 </html>

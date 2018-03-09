@@ -2,6 +2,7 @@ import markdown
 import codecs
 import requests
 import pypandoc
+from md2pdf.core import md2pdf
 
 
 
@@ -75,4 +76,7 @@ def markdown_to_html():
     output_file.write(html)
 
 def pdftest():
-    output = pypandoc.convert_file('Report.md', 'pdf', outputfile="Report.pdf")
+    md2pdf('report.pdf',
+           md_file_path='Report.md')
+
+pdftest()

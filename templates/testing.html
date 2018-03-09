@@ -9,140 +9,108 @@
 
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="https://bootstrapious.com/tutorial/sidebar/style2.css">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style2.css') }}">
         <!-- Scrollbar Custom CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/zoom.css') }}">
     </head>
     <body>
 
 
 
-        <div class="wrapper">
-            <!-- Sidebar Holder -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h3>Bootstrap Sidebar</h3>
-                </div>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
 
-                <ul class="list-unstyled components">
-                    <p>Dummy Heading</p>
-                    <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li><a href="#">Home 1</a></li>
-                            <li><a href="#">Home 2</a></li>
-                            <li><a href="#">Home 3</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li><a href="#">Page 1</a></li>
-                            <li><a href="#">Page 2</a></li>
-                            <li><a href="#">Page 3</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-
-                <ul class="list-unstyled CTAs">
-                    <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
-                    <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
-                    <li>
-                                                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                                <i class="glyphicon glyphicon-align-left"></i>
-                                <span>Toggle Sidebar</span>
-                            </button></li>
-                </ul>
-            </nav>
-
-            <!-- Page Content Holder -->
-            <div id="content">
-
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-
-                        <div class="navbar-header">
-                        </div>
-
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"></div>
-                    </div>
-                </nav>
-
-
-
-                <h2>Example report below:</h2>
-        <div class="jumbotron">
-    <h3 style="color:#000099"><i>A Theory of How Columns in the Neocortex Enable Learning the Structure of the World</i></h3>
-    <br>
-    <ul>
-        <li>DOI: 10.3389/fncir.2017.00081</li>
-        <li>Date: 2017 Oct 25</li>
-        <li>Author(s): Hawkins J, Ahmad S, Cui Y</li>
-    </ul>
-    <br>
-    <h4 style="line-height:1.75">Abstract: 'The neocortex is complex. Within its 2.5 mm thickness are dozens of
-        cell types, numerous layers, and intricate connectivity patterns. The connections between cells suggest a
-        columnar flow of information across layers as well as a laminar flow within some layers. Fortunately, this
-        complex circuitry is remarkably preserved in all regions, suggesting that a canonical circuit consisting of
-        columns and layers underlies everything the neocortex does. Understanding the function of the canonical
-        circuit is a key goal of neuroscience.'
-    </h4>
-                <div class="container">
-      <h2>Pictures of Coffee</h2>
-      <div class="row">
-        <div class="col-lg-4 col-xs-6 thumbnail"><img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/04LDEYRW59.jpg" alt=""></div>
-        <div class="col-lg-4 col-xs-6 thumbnail"><img  src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/90V03Q5Y60.jpg" alt=""></div>
-        <div class="col-lg-4 col-xs-6 thumbnail"><img  src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/O83SF2RB6D.jpg" alt=""></div>
-
-      </div>
-
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">SciScraper</a>
     </div>
-        </div>
-</h4><h2>Example report below:</h2>
-        <div class="jumbotron">
-    <h3 style="color:#000099"><i>A Theory of How Columns in the Neocortex Enable Learning the Structure of the World</i></h3>
-    <br>
-    <ul>
-        <li>DOI: 10.3389/fncir.2017.00081</li>
-        <li>Date: 2017 Oct 25</li>
-        <li>Author(s): Hawkins J, Ahmad S, Cui Y</li>
-    </ul>
-    <br>
-    <h4 style="line-height:1.75">Abstract: 'The neocortex is complex. Within its 2.5 mm thickness are dozens of
-        cell types, numerous layers, and intricate connectivity patterns. The connections between cells suggest a
-        columnar flow of information across layers as well as a laminar flow within some layers. Fortunately, this
-        complex circuitry is remarkably preserved in all regions, suggesting that a canonical circuit consisting of
-        columns and layers underlies everything the neocortex does. Understanding the function of the canonical
-        circuit is a key goal of neuroscience.'
-</h4><h2>Example report below:</h2>
-        <div class="jumbotron">
-    <h3 style="color:#000099"><i>A Theory of How Columns in the Neocortex Enable Learning the Structure of the World</i></h3>
-    <br>
-    <ul>
-        <li>DOI: 10.3389/fncir.2017.00081</li>
-        <li>Date: 2017 Oct 25</li>
-        <li>Author(s): Hawkins J, Ahmad S, Cui Y</li>
-    </ul>
-    <br>
-    <h4 style="line-height:1.75">Abstract: 'The neocortex is complex. Within its 2.5 mm thickness are dozens of
-        cell types, numerous layers, and intricate connectivity patterns. The connections between cells suggest a
-        columnar flow of information across layers as well as a laminar flow within some layers. Fortunately, this
-        complex circuitry is remarkably preserved in all regions, suggesting that a canonical circuit consisting of
-        columns and layers underlies everything the neocortex does. Understanding the function of the canonical
-        circuit is a key goal of neuroscience.'
-</h4>
-            </div>
-        </div>
 
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ><a href="index.html">New Search</a></li>
+      </ul>
+
+
+      </div><!--navbar-->
+    </div><!--container-->
+
+    </nav>
+
+
+
+
+
+<div class="container">
+    <div class="jumbotron">
+
+                    <h3 style="color:#000099"><i>Emergence Of Transformation-Tolerant Representations Of Visual Objects In Rat Lateral Extrastriate Cortex </i></h3>
+                    <br>
+                    <ul>
+                        <li>PMC: 5388540 </li>
+                        <li>DOI: 10.7554/eLife.22794 </li>
+                        <li>2017 Apr 11 </li>
+                        <li>[&#39;Tafazoli S&#39;, &#39;Safaai H&#39;, &#39;De Franceschi G&#39;, &#39;Rosselli FB&#39;, &#39;Vanzella W&#39;, &#39;Riggi M&#39;, &#39;Buffolo F&#39;, &#39;Panzeri S&#39;, &#39;Zoccolan D&#39;] </li>
+                    </ul>
+                    <br>
+                    <p style="line-height:2.5;font-size:17px">Rodents are emerging as increasingly popular models of visual functions. Yet, evidence that rodent visual cortex is capable of advanced visual processing, such as object recognition, is limited. Here we investigate how neurons located along the progression of extrastriate areas that, in the rat brain, run laterally to primary visual cortex, encode object information. We found a progressive functional specialization of neural responses along these areas, with: (1) a sharp reduction of the amount of low-level, energy-related visual information encoded by neuronal firing; and (2) a substantial increase in the ability of both single neurons and neuronal populations to support discrimination of visual objects under identity-preserving transformations (e.g., position and size changes). These findings strongly argue for the existence of a rat object-processing pathway, and point to the rodents as promising models to dissect the neuronal circuitry underlying transformation-tolerant recognition of visual objects.DOI:http://dx.doi.org/10.7554/eLife.22794.001 OAB - Publisher: Abstract available from the publisher.</p>
+
+                    <br>
+                          <div class="container">
+                    <p>Figures from article:</p>
+                    <div class="row">
+                        <ul class="list-inline gallery">
+
+                         <div class="col-lg-4 col-xs-6 thumbnail zoom"><img  src="https://www.ncbi.nlm.nih.gov//pmc/articles/PMC5388540/bin/elife-22794-fig2.jpg" alt=""></div>
+
+                         <div class="col-lg-4 col-xs-6 thumbnail zoom"><img  src="https://www.ncbi.nlm.nih.gov//pmc/articles/PMC5388540/bin/elife-22794-fig3.jpg" alt=""></div>
+
+                         <div class="col-lg-4 col-xs-6 thumbnail zoom"><img  src="https://www.ncbi.nlm.nih.gov//pmc/articles/PMC5388540/bin/elife-22794-fig4.jpg" alt=""></div>
+                `       </ul>
+                    </div>
+                    </div>
+    <br>
+    <br>
+    <hr>
+    <hr>
+    <br>
+
+
+                    <h3 style="color:#000099"><i>Visual Projection Neurons In The Drosophila Lobula Link Feature Detection To Distinct Behavioral Programs </i></h3>
+                    <br>
+                    <ul>
+                        <li>PMC: 5293491 </li>
+                        <li>DOI: 10.7554/eLife.21022 </li>
+                        <li>2016 Dec 28 </li>
+                        <li>[&#39;Wu M&#39;, &#39;Nern A&#39;, &#39;Williamson WR&#39;, &#39;Morimoto MM&#39;, &#39;Reiser MB&#39;, &#39;Card GM&#39;, &#39;Rubin GM&#39;] </li>
+                    </ul>
+                    <br>
+                    <p style="line-height:1.75">Visual projection neurons (VPNs) provide an anatomical connection between early visual processing and higher brain regions. Here we characterize lobula columnar (LC) cells, a class of Drosophila VPNs that project to distinct central brain structures called optic glomeruli. We anatomically describe 22 different LC types and show that, for several types, optogenetic activation in freely moving flies evokes specific behaviors. The activation phenotypes of two LC types closely resemble natural avoidance behaviors triggered by a visual loom. In vivo two-photon calcium imaging reveals that these LC types respond to looming stimuli, while another type does not, but instead responds to the motion of a small object. Activation of LC neurons on only one side of the brain can result in attractive or aversive turning behaviors depending on the cell type. Our results indicate that LC neurons convey information on the presence and location of visual features relevant for specific behaviors.DOI:http://dx.doi.org/10.7554/eLife.21022.001 OAB - Publisher: Abstract available from the publisher.</p>
+
+                    <br>
+                          <div class="container">
+                    <p>Figures from article:</p>
+                    <div class="row">
+
+                         <div class="col-lg-4 col-xs-6 thumbnail"><img  src="https://www.ncbi.nlm.nih.gov//pmc/articles/PMC5293491/bin/elife-21022-fig2.jpg" alt=""></div>
+
+                         <div class="col-lg-4 col-xs-6 thumbnail"><img  src="https://www.ncbi.nlm.nih.gov//pmc/articles/PMC5293491/bin/elife-21022-fig3.jpg" alt=""></div>
+
+                         <div class="col-lg-4 col-xs-6 thumbnail"><img  src="https://www.ncbi.nlm.nih.gov//pmc/articles/PMC5293491/bin/elife-21022-fig4.jpg" alt=""></div>
+
+
+                    </div>
+                      </div>
+</div>
+        </div>
 
 
 
