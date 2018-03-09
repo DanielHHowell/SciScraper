@@ -2,7 +2,7 @@ import markdown
 import codecs
 import requests
 import pypandoc
-from md2pdf.core import md2pdf
+#from md2pdf.core import md2pdf
 
 
 
@@ -75,8 +75,3 @@ def markdown_to_html():
                               errors="xmlcharrefreplace")
     output_file.write(html)
 
-def pdftest():
-    md2pdf('report.pdf',
-           md_file_path='Report.md')
-
-pdftest()
