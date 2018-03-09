@@ -17,7 +17,7 @@ https://github.com/EFavDB/PubmedCentral_Scraper (in R, only from PubMed)
 ## Using the Scraper
 
 The scraper takes up to three arguments: a main topic, optional queries, and the maximum number of results to return. It is initialized by running Main.py, and generates a dictionary with results. The 'sciscraper' function in Main.py can be edited to include sql_insert (also from Main.py) or markdown/HTML/PDF versions of the report (from the ReportGenerator.py functions).
-A local web interface can be run with Flasker.py, and accessed via http://127.0.0.1:5000/index.html. This is what is currently hosted on the Google Cloud App Engine.
+A local web interface can be run with Flasker.py, and accessed via http://127.0.0.1:5000/index.html. This is presented with Bootstrap and is what is currently hosted on the Google Cloud App Engine.
 
 ### Function Documentation
 
