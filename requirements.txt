@@ -1,0 +1,7 @@
+flask
+wtforms
+requests
+xmltodict
+xml.etree.ElementTree
+markdown
+lxml

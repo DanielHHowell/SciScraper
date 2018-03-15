@@ -2,7 +2,7 @@ import requests
 import xmltodict
 import sqlbackend
 import xml.etree.ElementTree as ET
-import PageScraper
+import ImageScraper
 import ReportGenerator
 
 
@@ -120,8 +120,6 @@ def sciscraper(topic,queries,nResults,sortby):
     for PMC in g.PMCIDs:
         esummary(PMC)
         g.mainDict[PMC]['Images'] = []
-        for image in PageScraper.image_scraper(PMC):
+        for image in ImageScraper.image_scraper(PMC):
             g.mainDict[PMC]['Images'].append(image)
-    #ReportGenerator.markdown_generator(g.mainDict, g.query, g.nResults)
-    #ReportGenerator.htmltest()
     return g
