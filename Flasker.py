@@ -25,9 +25,8 @@ def index():
         nResults = request.form['nResults']
 
         if form.validate():
-            g = Main.sciscraper(topic,queries,nResults,'relevance')
-            resultdict = g.mainDict
-            return render_template('/report.html', reportdict=resultdict, searchtitle = g.query, nResults = g.nResults)
+            mainDict, query = Main.sciscraper(topic,queries,nResults,'relevance')
+            return render_template('/report.html', reportdict=mainDict, searchtitle = query, nResults = nResults)
 
         else:
             flash('Error: All the form fields are required. ')
