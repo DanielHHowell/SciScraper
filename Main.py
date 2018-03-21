@@ -17,4 +17,4 @@ def sql_insert():
         ref = g.mainDict[i]
         sqlbackend.insert(g.query, i, ref['DOI'], ref['Title'], ', '.join(ref['Authors']),
                           ref['Date'], ref['Abstract'], ', '.join(ref['Images']))
-
+    return
