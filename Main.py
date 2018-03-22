@@ -11,10 +11,10 @@ def sciscraper(topic,queries,nResults,sortby):
         mainDict[PMC]['Images'] = PageScraper.image_scraper(PMC)
     return mainDict, query
 
-def sql_insert():
+def sql_insert(mainDict, query):
     sqlbackend.create_table()
-    for i in g.mainDict:
-        ref = g.mainDict[i]
-        sqlbackend.insert(g.query, i, ref['DOI'], ref['Title'], ', '.join(ref['Authors']),
+    for i in mainDict:
+        ref = mainDict[i]
+        sqlbackend.insert(query, i, ref['DOI'], ref['Title'], ', '.join(ref['Authors']),
                           ref['Date'], ref['Abstract'], ', '.join(ref['Images']))
     return
