@@ -1,7 +1,7 @@
 import markdown
 import codecs
 import requests
-import pypandoc
+#import pypandoc
 #from md2pdf.core import md2pdf
 
 
