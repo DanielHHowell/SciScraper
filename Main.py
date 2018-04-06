@@ -26,4 +26,4 @@ def tester(topic,queries,nResults,sortby):
     KeywordAnalysis.get_continuous_chunks(" ".join(alltext))
 
 
-tester('tetrachromacy',queries=None,nResults='5', sortby='relevance')
+#tester('tetrachromacy',queries=None,nResults='5', sortby='relevance')
