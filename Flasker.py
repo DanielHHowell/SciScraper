@@ -1,24 +1,25 @@
 from flask import Flask, render_template, flash, request
-from wtforms import Form, StringField
+from wtforms import Form, StringField, validators
 import Main
 
 
 DEBUG = True
 app = Flask(__name__)
 
-
+app.config.from_object(__name__)
+app.config['SECRET_KEY'] = 'e5ac358c-f0bf-11e5-9e39-d3b532c10a28'
 
 class InputForm(Form):
-    topic = StringField('topic:')
+    topic = StringField('topic:', [validators.required()])
     queries = StringField('queries:')
-    nResults = StringField('nResults:')
+    nResults = StringField('nResults:', [validators.required()])
 
 
-@app.route("/index.html", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def index():
     form = InputForm(request.form)
 
-    print(form.errors)
+
     if request.method == 'POST':
         topic = request.form['topic']
         queries = request.form['queries']
@@ -29,7 +30,8 @@ def index():
             return render_template('/report.html', reportdict=mainDict, searchtitle = query, nResults = nResults)
 
         else:
-            flash('Error: All the form fields are required. ')
+            print("testing")
+            flash('Error: Check to make sure you have submitted a main topic and number of results to search for~. ')
 
     return render_template('index.html', form=form)
 
@@ -37,9 +39,5 @@ def index():
 def testing():
     return render_template('testing.html')
 
-@app.route("/testingindex.html")
-def testingindex():
-    return render_template('testingindex.html')
-
-if __name__ == '__main__':
-   app.run(debug = True)
+if __name__ == "__main__":
+    app.run(debug=True)
