@@ -27,7 +27,7 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ><a href="index.html">New Search</a></li>
+        <li ><a href="/">New Search</a></li>
       </ul>
 
 
@@ -36,20 +36,11 @@
 
     </nav>
 
-    
+
 
 
 <div class="container">
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
 
 
   <h2>SciScraper</h2>
@@ -59,14 +50,31 @@
       <label for="topic">Main topic:</label>
       <input type="text" class="form-control" id="topic" name="topic" placeholder="e.g. grid cells">
       <br>
-      <label for="queries">Additional queries (comma separated):</label>
+      <label for="queries">Additional queries (optional - comma separated):</label>
       <input type="text" class="form-control" id="queries" name="queries" placeholder="e.g. neurons, brain">
       <br>
-      <label for="nResults">Number of Results:</label>
-      <input type="text" class="form-control" id="nResults" name="nResults" placeholder="e.g. 10">
-
+      <label for="nResults">Number of Results (Enter a number between 1-50):</label>
+      <input type="text" class="form-control" id="nResults" name="nResults" placeholder="e.g. 10" value={{ default_results }}>
+        <br>
+        {% for subfield in form.sortby %}
+            <tr>
+                <td>{{ subfield }}</td>
+                <td>{{ subfield.label }}</td>
+            </tr>
+        {% endfor %}
 
     </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+             </ul>
+        {% endif %}
+    {% endwith %}
+
     <button type="submit" class="btn btn-success">Search</button>
   </form>
 

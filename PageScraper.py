@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 
 def esearch(topic_input, queries, nResults, sortby):
 
-    topic = topic_input.replace(' ','+')
+    topic = '%22'+topic_input.replace(' ','+')+'%22'
     nResults = nResults
 
     if queries:
@@ -16,6 +16,7 @@ def esearch(topic_input, queries, nResults, sortby):
         search_terms = topic+'+AND+%28'+boolean_queries+'%29'
     else:
         search_terms=topic
+
     baseURL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pmc&sort='+sortby+'&retmax='+nResults+'&term='
     r = requests.get(baseURL+search_terms)
     xmldict = xmltodict.parse(r.content)
@@ -100,27 +101,7 @@ def image_scraper(PMC):
     search = base_url+PMC
     r = requests.get(search)
     data = html.fromstring(r.content)
-    img_links = data.xpath('//img[@class="small-thumb"]/@src-large')
+    img_links = data.xpath('//img[@class="tileshop"]/@src')
     img_URLs = ['https://www.ncbi.nlm.nih.gov/'+i for i in img_links if img_links][1:4]
     return img_URLs
 
-
-def text_scraper(PMC):
-    """Retrieves abstract if unavailable in NCBI API"""
-    base_url = 'https://www.ncbi.nlm.nih.gov/pmc/articles/'
-    search = base_url+PMC
-    r = requests.get(search)
-    data = html.fromstring(r.content)
-    text_data = data.xpath('//*[@id="P1"]/text()')
-    if not text_data:
-        text_data = data.xpath('//*[@id="__p1"]/text()')
-    if not text_data:
-        text_data = data.xpath('//*[@id="__p4"]/text()')
-    if not text_data:
-        text_data = data.xpath('//*[@id="Par1"]/text()')
-    if not text_data:
-        text_data = data.xpath('//*[@id="Par1"]/text()[1]')
-    if not text_data:
-        text_data.append('blank')
-    formatted_text=str(text_data)[1:-1]
-    return formatted_text
