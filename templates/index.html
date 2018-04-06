@@ -83,13 +83,18 @@
         <h2>About</h2>
         <p>The goal of this project was to give the searching of NCBI a facelift. Pouring
         through the database is an outdated interaction, which here has been made into a
-        single-page experience with downloadable reports available as well
-            (in either HTML or PDF). The scraper uses their native API which does not always
+        single-page experience with downloadable reports available as well (in either HTML or PDF).
+            The scraper uses their native API which does not always
             provide complete information, and for now results in occasional formatting errors.
-            Other areas of improvement include the slow report generation speed (5-10 seconds) as well as
-            an inherent difficulty finding the most relevant images and keywords algorithmically.</p>
-        <p><a href="https://github.com/DanielHHowell/SciScraper">Link to GitHub page</a></p>
-        <p>Send suggestions or feature ideas here~</p>
+            Other areas of improvement include the slow report generation speed (5-10 seconds).</p>
+        <p>If the main topic is already fairly specific it is not necessary to add any optional queries,
+        otherwise they are good for maintaining relevance and context. The search will find all articles
+        that match at least one of the optional queries.</p>
+        <p>The scraper grabs the title, authors, DOI, abstract, and three 'important' figures
+        from each article. It then uses some basic natural language processing on the full text
+            of all articles in the report to generate a likely list of key concepts for further
+            investigation. </p>
+        <p>It is powered by Python, Flask and Bootstrap - <a href="https://github.com/DanielHHowell/SciScraper">Link to GitHub page</a></p>
         <p>- Daniel Howell</p>
     </div>
 

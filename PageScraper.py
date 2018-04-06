@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 
 def esearch(topic_input, queries, nResults, sortby):
 
+
     topic = '%22'+topic_input.replace(' ','+')+'%22'
     nResults = nResults
 
@@ -22,7 +23,7 @@ def esearch(topic_input, queries, nResults, sortby):
     xmldict = xmltodict.parse(r.content)
     PMCIDs = [i for i in xmldict['eSearchResult']['IdList']['Id']]
 
-    #Formats the search nicely for use in the report
+    #Formats the search nicely for use in the report, returning 'query'
     printable_search = topic_input
     if queries:
         printable_search += ':'

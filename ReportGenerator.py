@@ -54,7 +54,7 @@ def html_generator(dictreport, query, nResults):
     H2 = '> - Articles dating from range 2000-2010 \n'
     H3 = '> - Most commonly referenced words in abstract: list here \n'
     header = '# '+title+' (Summary Report) \n'
-    with open('Report.md', 'w', encoding="utf-8") as f:
+    with open('', 'w', encoding="utf-8") as f:
         f.write(header+sep+H1+H2+H3+'\n')
         for PMC in dictreport:
             ref = dictreport[PMC]

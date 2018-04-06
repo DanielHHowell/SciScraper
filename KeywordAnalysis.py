@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from collections import Counter
 
-stopwords = ['et al.', 'n =', 'standard', 'deviation', 'windowFigure', 'windowFig', 'free article ]', 'additional data file','animal ', 'uniform distribution', 'significant differences']
+
 
 def text_grab(PMC):
     url = "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC"+PMC
@@ -18,13 +18,17 @@ def text_grab(PMC):
     return text
 
 def get_continuous_chunks(text):
-    text = pos_tag(word_tokenize(text))
+    stopwords = ['et', 'al.', 'n', 'deviation', 'windowFigure', 'windowFig', ' ]',
+                 'additional', 'data', 'file', ' ', 'distribution', 'significant']
+    words = word_tokenize(text)
+    filtered_text = [w for w in words if w not in stopwords]
+    processed_text = pos_tag(filtered_text)
 
     #Regex to grammatically identify a set of: adjective+noun(+noun)
     #From NLTK: JJ* = adjective/numeral/ordinal/comparative/superlative, NN* = Nouns
     chunkGram = r"Chunk: {<JJ.?><NN.?>?<NN.?>}"
     chunkParser = RegexpParser(chunkGram)
-    chunked = chunkParser.parse(text)
+    chunked = chunkParser.parse(processed_text)
     keywords = [i.leaves() for i in chunked if type(i)==Tree]
     newkeys = []
 
@@ -36,7 +40,10 @@ def get_continuous_chunks(text):
             for tuple in list:
                 temp.append(tuple[0])
             newkeys.append(" ".join(temp))
-    return Counter(newkeys)
+
+    counted = Counter(newkeys).most_common(11)
+    keywords = [i[0] for i in counted]
+    return keywords
 
 
 

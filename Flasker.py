@@ -3,7 +3,6 @@ from wtforms import Form, StringField, IntegerField, RadioField, validators
 import Main
 
 
-DEBUG = True
 app = Flask(__name__)
 
 app.config.from_object(__name__)
@@ -13,7 +12,7 @@ class InputForm(Form):
     topic = StringField('topic:', [validators.required()])
     queries = StringField('queries:')
     nResults = IntegerField('nResults:', [validators.required()])
-    sortby = RadioField('Label', choices=[('relevance','Relevance'),('pubdate','Publication Date')])
+    sortby = RadioField('Label', choices=[('relevance','Relevance'),('pubdate','Publication Date (low relevance warning)')], default='relevance')
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -28,11 +27,10 @@ def index():
         sortby = request.form['sortby']
 
         if form.validate():
-            mainDict, query = Main.sciscraper(topic,queries,nResults,sortby)
-            return render_template('/report.html', reportdict=mainDict, searchtitle = query, nResults = nResults)
+            mainDict, query, keywords = Main.sciscraper(topic,queries,nResults,sortby)
+            return render_template('/report.html', reportdict=mainDict, searchtitle = query, nResults = nResults, keywords = ", ".join(keywords))
 
         else:
-            print("testing")
             flash('Error: Check to make sure you have submitted a main topic and number of results to search for~ ')
 
     return render_template('index.html', form=form, default_results='5')

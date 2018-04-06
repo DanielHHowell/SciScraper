@@ -16,8 +16,8 @@ https://github.com/EFavDB/PubmedCentral_Scraper (in R, only from PubMed)
 
 ## Using the Scraper
 
-The scraper takes up to three arguments: a main topic, optional queries, and the maximum number of results to return. It is initialized by running Main.py, and generates a dictionary with results. The 'sciscraper' function in Main.py can be edited to include sql_insert (also from Main.py) or markdown/HTML/PDF versions of the report (from the ReportGenerator.py functions).
-A local web interface can be run with Flasker.py, and accessed via http://127.0.0.1:5000/index.html. This is presented with Bootstrap and is what is currently hosted in the webapp. There is an included SQL table generator that can be called with the sql_insert(mainDict) from Main.py, but this is not currently in use by default or within the webapp.
+The scraper takes up to three arguments: a main topic, optional queries, and the maximum number of results to return. It is initialized by running sciscraper() from Main.py, and generates a dictionary with results. There is an included SQL table generator that can be called with the sql_insert(mainDict) from Main.py, but this is not currently in use by default or within the webapp. Markdown/HTML/PDF versions of the report can also be generated (from the ReportGenerator.py functions).
+A local web interface can be run with Flasker.py, and accessed via the standard http://127.0.0.1:5000/. This is presented with Bootstrap and is what is currently hosted in the webapp at http://sciscraper.pythonanywhere.com.
 
 ### Function Documentation
 
@@ -33,18 +33,13 @@ ESearch can be used initially to query the database, then EFetch/ESummary to ret
 
 
 
-* Curtailing long sections (e.g. authors/abstract)
+* Curtailing long sections/'anthology' articles (scrape +2 nResults as buffer?)
 * Download HTML/PDF feature (email?)
 * Interaction?
 * Popular searches
 * Faster
-* Sort by (relevance, date, etc.)
-* Remove 'anthology' articles (scrape +2 nResults as buffer?)
-* NLTK
 * Sidebar nav of studies?
 * Additional DB's - arXiv, etc.
-* Checkbox for reports
-* Alert message if not_validate()
 * Large-scale analytics with bootstrap cards UI?
 
 
