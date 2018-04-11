@@ -19,7 +19,6 @@ class InputForm(Form):
 def index():
     form = InputForm(request.form)
 
-
     if request.method == 'POST':
         topic = request.form['topic']
         queries = request.form['queries']

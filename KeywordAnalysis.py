@@ -14,12 +14,15 @@ def text_grab(PMC):
     #Grabs all the article text while ignoring the references section
     paragraphs = soup.find_all("div", "tsec sec")
     for i in paragraphs[:-1]:
-        text+= i.text
+        text+= ' '+i.text
     return text
 
 def get_continuous_chunks(text):
     stopwords = ['et', 'al.', 'n', 'deviation', 'windowFigure', 'windowFig', ' ]',
-                 'additional', 'data', 'file', ' ', 'distribution', 'significant']
+                 'additional', 'data', 'file', ' ', 'distribution', 'significant',
+                 'clinical', 'adverse', 'sample', 'studies', 'significance',
+                 '<', '>', '=', 'window', 't', 't-test', 'supplementary', 'Supplementary', 'important'
+                 'experimental', 'study', 'subjects', 'conditions', 'experiments']
     words = word_tokenize(text)
     filtered_text = [w for w in words if w not in stopwords]
     processed_text = pos_tag(filtered_text)
