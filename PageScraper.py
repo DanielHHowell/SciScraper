@@ -93,6 +93,6 @@ def image_scraper(pmc):
     search = base_url + pmc
     r = requests.get(search)
     data = html.fromstring(r.content)
-    img_links = data.xpath('//img[@class = "tileshop" or @class = 'fig-image']/@src')
+    img_links = data.xpath('//img[@class = "tileshop"|@class = 'fig-image']/@src')
     img_urls = ['https://www.ncbi.nlm.nih.gov/' + i for i in img_links if img_links][1:4]
     return img_urls
