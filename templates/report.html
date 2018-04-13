@@ -45,7 +45,7 @@
         <br>
     <ul>
         <li><h5>Showing top (<b>{{nResults}}</b>) results</h5></li>
-        <li><h5>Key concepts: {$ for word, link in key_tuples %}
+        <li><h5>Key concepts: {% for word, link in key_tuples %}
             <a href="{{ link }}" target="_blank">{{ word }} </a> {% endfor %} </h5></li>
     </ul>
         </div>
