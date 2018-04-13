@@ -19,23 +19,39 @@ class InputForm(Form):
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    form = InputForm(request.form)
 
-    if request.method == 'POST':
-        topic = request.form['topic']
-        queries = request.form['queries']
-        nResults = request.form['nResults']
-        sortby = request.form['sortby']
+    # If args were submitted right in the URL, sends straight to the Main.py report
+    if request.args.get('topic'):
+        topic = request.args.get('topic')
+        queries = request.args.get('queries')
+        nResults = request.args.get('nResults')
+        sortby = request.args.get('sortby')
 
-        if form.validate():
-            mainDict, query, keywords = Main.sciscraper(topic, queries, nResults, sortby)
-            return render_template('/report.html', reportdict=mainDict, searchtitle=query, nResults=nResults,
-                                   keywords=", ".join(keywords))
+        mainDict, query, keywords = Main.sciscraper(topic, queries, nResults, sortby)
+        return render_template('/report.html', reportdict=mainDict, searchtitle=query, nResults=nResults,
+                               keywords=", ".join(keywords))
 
-        else:
-            flash('Error: Check to make sure you have submitted a main topic and number of results to search for~ ')
+    # If not, uses the form POST request from index.html
+    else:
 
-    return render_template('index.html', form=form, default_results='5')
+        form = InputForm(request.form)
+        if request.method == 'POST':
+            topic = request.form['topic']
+            queries = request.form['queries']
+            nResults = request.form['nResults']
+            sortby = request.form['sortby']
+
+            if form.validate():
+                mainDict, query, keywords = Main.sciscraper(topic, queries, nResults, sortby)
+                keyword_links = ['https://www.google.com/search?q=' + i.replace(" ","+") for i in keywords]
+                key_tuples = zip(keywords,keyword_links)
+                return render_template('/report.html', reportdict=mainDict, searchtitle=query, nResults=nResults,
+                                       key_tuples=key_tuples)
+
+            else:
+                flash('Error: Check to make sure you have submitted a main topic and number of results to search for~ ')
+
+        return render_template('index.html', form=form, default_results='5')
 
 
 @app.route("/testing.html")
