@@ -17,8 +17,8 @@ def esearch(topic_input, queries, nResults, sortby):
 
     base_url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pmc&sort=' + sortby + '&retmax=' + nResults + '&term='
     r = requests.get(base_url + search_terms)
-    xmldict = xmltodict.parse(r.content)
-    PMCIDs = [i for i in xmldict['eSearchResult']['IdList']['Id']]
+    xmltree = fromstring(r.content)
+    PMCIDs = [i.text for i in xmltree[3]]
 
     # Formats the search  for use in the report title, returning 'query'
     printable_search = topic_input
