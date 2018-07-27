@@ -1,4 +1,5 @@
 # SciScraper
+
 ### --WORK IN PROGRESS--
 
 The goal of this project is to create an efficient means of gathering as much scientific data as possible on a given topic. Legally, this limits the scope of the scraper to a handful of databases that fit this criteria, such as PubMed Central. Pertinent information such as abstracts, conclusions, and figures can then be concatenated into an database. These can then be converted into HTML for viewing, PDF for printing/sending, or perhaps some sort of interactive JS navigation.
@@ -13,6 +14,11 @@ Similar projects:
 https://github.com/ContentMine/journal-scrapers (for ContentMine framework)
 
 https://github.com/EFavDB/PubmedCentral_Scraper (in R, only from PubMed)
+
+## Hosted Version
+
+![](static/imgs/example.png)
+
 
 ## Using the Scraper
 
